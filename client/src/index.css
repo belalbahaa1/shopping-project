@@ -1,44 +1,44 @@
 @import "tailwindcss";
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-#root {
-  min-height: 100vh;
+@theme {
+  /* Brand Typography */
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+
+  /* Brand Colors - Sophisticated Palette */
+  --color-brand-primary: #4f46e5; /* Indigo 600 */
+  --color-brand-secondary: #9333ea; /* Purple 600 */
+  --color-brand-dark: #0f172a; /* Slate 950 */
+
+  /* Premium Design Tokens */
+  --radius-card: 2rem;
+  --radius-button: 1rem;
+
+  --shadow-premium: 0 4px 20px -1px rgba(0, 0, 0, 0.03);
+  --shadow-premium-hover: 0 30px 60px -12px rgba(79, 70, 229, 0.12);
 }
 
+@layer base {
+  body {
+    @apply bg-gray-50/50 font-sans antialiased text-gray-900;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/60 backdrop-blur-xl border border-white/80 shadow-sm;
+  }
+
+  .gradient-brand {
+    @apply bg-linear-to-br from-brand-primary to-brand-secondary;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-linear-to-br from-brand-primary to-brand-secondary;
+  }
+}
+
+/* Centralized Container Logic */
 .container {
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  @apply mx-auto px-6 w-full;
+  max-width: 1280px;
 }
-
-@media (min-width: 640px) {
-  .container {
-    max-width: 640px;
-  }
-}
-
-@media (min-width: 768px) {
-  .container {
-    max-width: 768px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    max-width: 1024px;
-  }
-}
-
-@media (min-width: 1280px) {
-  .container {
-    max-width: 1200px;
-  }
-}
-
