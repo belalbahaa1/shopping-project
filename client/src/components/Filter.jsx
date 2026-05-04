@@ -2,7 +2,7 @@ import React from "react";
 
 import { SlidersHorizontal, ChevronDown, Check } from "lucide-react";
 
-const Filter = () => {
+const Filter = ({ handleFilterBySize, size, handleFilterByOrder, sort }) => {
   return (
     <div className="glass rounded-[2rem] p-8 sticky top-32 border border-white/20 shadow-2xl backdrop-blur-xl">
       <div className="flex items-center gap-3 mb-10 pb-6 border-b border-slate-100">
@@ -31,7 +31,11 @@ const Filter = () => {
             Filter by Size
           </label>
           <div className="relative group">
-            <select className="w-full appearance-none bg-white border border-slate-200 rounded-xl px-4 py-3.5 pr-10 text-slate-900 font-medium focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all outline-none cursor-pointer">
+            <select
+              value={size}
+              onChange={handleFilterBySize}
+              className="w-full appearance-none bg-white border border-slate-200 rounded-xl px-4 py-3.5 pr-10 text-slate-900 font-medium focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all outline-none cursor-pointer"
+            >
               <option value="all">All Sizes</option>
               <option value="xs">Extra Small (XS)</option>
               <option value="s">Small (S)</option>
@@ -49,7 +53,11 @@ const Filter = () => {
             Sort Order
           </label>
           <div className="relative group">
-            <select className="w-full appearance-none bg-white border border-slate-200 rounded-xl px-4 py-3.5 pr-10 text-slate-900 font-medium focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all outline-none cursor-pointer">
+            <select
+              onChange={handleFilterByOrder}
+              value={sort}
+              className="w-full appearance-none bg-white border border-slate-200 rounded-xl px-4 py-3.5 pr-10 text-slate-900 font-medium focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all outline-none cursor-pointer"
+            >
               <option value="latest">Latest Arrivals</option>
               <option value="lower">Price: Low to High</option>
               <option value="highest">Price: High to Low</option>
