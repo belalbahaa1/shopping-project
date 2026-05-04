@@ -6,32 +6,45 @@ import { useState } from "react";
 import data from "./data.json";
 
 function App() {
-  const [products, setProducts] = useState(data);
+  // 1. Keep track of filter criteria only
+  const [sort, setSort] = useState("latest");
+  const [size, setSize] = useState("all");
+
+  // 2. Derive the filtered and sorted products list dynamically
+  // This replaces the need for a 'products' state and manually calling 'setProducts'
+  const filteredProducts = data
+    .filter((product) => {
+      if (size === "all") return true;
+      return product.sizes.includes(size);
+    })
+    .sort((a, b) => {
+      if (sort === "lower") return a.price - b.price;
+      if (sort === "highest") return b.price - a.price;
+      return a.id < b.id ? 1 : -1; // "latest" (assuming higher ID = newer)
+    });
+
+  // 3. Simple, clean handlers
+  const handleFilterBySize = (e) => setSize(e.target.value);
+  const handleFilterByOrder = (e) => setSort(e.target.value);
+
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 relative overflow-hidden">
       <Header />
       <main className="grow container py-12">
         <div className="flex flex-col md:flex-row gap-12">
-          {/* Main Products Area */}
           <div className="md:w-3/4">
-            <div className="mb-8">
-              <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">
-                Premium Collection
-              </h1>
-              <p className="text-slate-500 mt-2 font-medium">
-                Discover our handpicked products for your lifestyle.
-              </p>
-            </div>
-            <Products products={products} />
+            <Products products={filteredProducts} />
           </div>
-          {/* Sidebar Area - Now on the left */}
           <aside className="md:w-1/4">
-            <Filter />
+            <Filter
+              handleFilterBySize={handleFilterBySize}
+              handleFilterByOrder={handleFilterByOrder}
+              size={size}
+              sort={sort}
+            />
           </aside>
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }
