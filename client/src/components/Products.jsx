@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ShoppingCart } from "lucide-react";
 import ProductModal from "./ProductModal";
 
-const Products = ({ products }) => {
+const Products = ({ products, addToCart }) => {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   const openModal = (item) => {
@@ -40,9 +40,12 @@ const Products = ({ products }) => {
               <span className="text-2xl font-black text-slate-900">
                 ${product.price}
               </span>
-              <button className="h-10 px-4 bg-slate-900 text-white text-sm font-bold rounded-xl hover:bg-slate-800 transition-colors flex items-center gap-2">
+              <button
+                onClick={() => addToCart(product)}
+                className="h-10 px-4 bg-slate-900 text-white text-sm font-bold rounded-xl hover:bg-slate-800 transition-colors flex items-center gap-2"
+              >
                 <ShoppingCart size={16} />
-                Add
+                Add To Cart
               </button>
             </div>
           </div>

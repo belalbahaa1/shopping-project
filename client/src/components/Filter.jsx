@@ -2,7 +2,14 @@ import React from "react";
 
 import { SlidersHorizontal, ChevronDown, Check } from "lucide-react";
 
-const Filter = ({ handleFilterBySize, size, handleFilterByOrder, sort }) => {
+const Filter = ({
+  handleFilterBySize,
+  size,
+  handleFilterByOrder,
+  sort,
+  productsCount,
+}) => {
+  console.log(productsCount);
   return (
     <div className="glass rounded-[2rem] p-8 sticky top-32 border border-white/20 shadow-2xl backdrop-blur-xl">
       <div className="flex items-center gap-3 mb-10 pb-6 border-b border-slate-100">
@@ -21,7 +28,7 @@ const Filter = ({ handleFilterBySize, size, handleFilterByOrder, sort }) => {
             Inventory
           </span>
           <span className="text-sm font-bold text-slate-900 bg-white px-3 py-1 rounded-lg border border-slate-100 shadow-sm">
-            4 Products
+            {productsCount} Products
           </span>
         </div>
 
@@ -68,10 +75,6 @@ const Filter = ({ handleFilterBySize, size, handleFilterByOrder, sort }) => {
           </div>
         </div>
       </div>
-
-      <button className="w-full bg-slate-900 text-white text-sm font-bold py-4 rounded-xl hover:bg-indigo-600 focus:ring-4 focus:ring-indigo-500/20 shadow-xl shadow-slate-900/10 transition-all duration-300 active:scale-[0.98] group flex items-center justify-center gap-2">
-        Reset Filters
-      </button>
     </div>
   );
 };
