@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { ShoppingBag, Trash2, ShoppingCart, Plus, Minus } from "lucide-react";
+import CheckoutForm from "./CheckoutForm";
 
 const Cart = ({ cartItems, removeFromCart, clearCart, updateQuantity }) => {
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+
+  const openCheckout = () => {
+    if (cartItems.length > 0) {
+      setIsCheckoutOpen(true);
+    }
+  };
+
+  const closeCheckout = () => {
+    setIsCheckoutOpen(false);
+  };
+
   return (
     <div className="mt-16 bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-2xl shadow-slate-200/50 relative overflow-hidden">
       {/* Decorative background element */}
@@ -110,7 +123,7 @@ const Cart = ({ cartItems, removeFromCart, clearCart, updateQuantity }) => {
           </div>
         ))}
       </div>
-      {/* Cart Summary / Empty State Placeholder */}
+      {/* Cart Summary */}
       <div className="mt-10 pt-10 border-t border-slate-100">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="flex items-center gap-6">
@@ -127,12 +140,22 @@ const Cart = ({ cartItems, removeFromCart, clearCart, updateQuantity }) => {
             </div>
           </div>
 
-          <button className="w-full md:w-auto px-10 py-5 bg-slate-900 text-white font-bold text-lg rounded-[1.25rem] hover:bg-indigo-600 transition-all duration-300 shadow-xl shadow-slate-200 hover:shadow-indigo-200 hover:-translate-y-1 flex items-center justify-center gap-3">
+          <button
+            onClick={openCheckout}
+            disabled={cartItems.length === 0}
+            className={`w-full md:w-auto px-10 py-5 font-bold text-lg rounded-[1.25rem] transition-all duration-300 flex items-center justify-center gap-3 shadow-xl ${
+              cartItems.length === 0
+                ? "bg-slate-100 text-slate-400 cursor-not-allowed shadow-none"
+                : "bg-slate-900 text-white hover:bg-indigo-600 shadow-slate-200 hover:shadow-indigo-200 hover:-translate-y-1"
+            }`}
+          >
             <ShoppingCart size={20} />
             Checkout Now
           </button>
         </div>
       </div>
+
+      <CheckoutForm isOpen={isCheckoutOpen} onClose={closeCheckout} />
     </div>
   );
 };
