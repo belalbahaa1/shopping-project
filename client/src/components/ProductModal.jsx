@@ -7,7 +7,7 @@ if (typeof window !== "undefined") {
   Modal.setAppElement("#root");
 }
 
-const ProductModal = ({ isOpen, onClose, product }) => {
+const ProductModal = ({ isOpen, onClose, product, addToCart }) => {
   if (!product) return null;
 
   return (
@@ -79,12 +79,15 @@ const ProductModal = ({ isOpen, onClose, product }) => {
           </div>
 
           <div className="mt-auto space-y-4">
-            <button className="w-full bg-slate-900 text-white font-bold py-5 rounded-[1.25rem] hover:bg-slate-800 transition-all duration-300 flex items-center justify-center gap-3 shadow-xl shadow-slate-900/10 active:scale-[0.98]">
+            <button
+              onClick={() => {
+                addToCart(product);
+                onClose();
+              }}
+              className="w-full bg-slate-900 text-white font-bold py-5 rounded-[1.25rem] hover:bg-slate-800 transition-all duration-300 flex items-center justify-center gap-3 shadow-xl shadow-slate-900/10 active:scale-[0.98]"
+            >
               <ShoppingCart size={20} />
               Add to Cart
-            </button>
-            <button className="w-full bg-white text-slate-900 font-bold py-5 rounded-[1.25rem] border-2 border-slate-100 hover:bg-slate-50 transition-all duration-300 active:scale-[0.98]">
-              Buy Now
             </button>
           </div>
         </div>

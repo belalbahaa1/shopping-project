@@ -56,6 +56,7 @@ const Products = ({ products, addToCart }) => {
         isOpen={!!selectedProduct}
         onClose={closeModal}
         product={selectedProduct}
+        addToCart={addToCart}
       />
     </div>
   );
